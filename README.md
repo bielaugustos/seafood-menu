@@ -1,9 +1,10 @@
-# Pesqueiro Reino Encantado — pedidos online
+# Peixes Encantados — pedidos online
+<img width="1790" height="1793" alt="seafood-menu-weld vercel app_" src="https://github.com/user-attachments/assets/7b9841cd-c0e6-4f64-b067-eb41f14133a0" />
 
 Next.js + Supabase. O cliente monta o carrinho, escolhe como quer receber
 (**consumir no local**, **retirar no balcão** ou **entrega**), escolhe a forma de pagamento
 (dinheiro, cartão ou Pix) e o pedido abre no WhatsApp do pesqueiro, já formatado.
-Se o Supabase estiver configurado, cada pedido também é salvo no banco.
+Com a Supabase configurada, cada pedido também é salvo no banco.
 
 ## Instalação
 
