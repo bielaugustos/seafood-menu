@@ -115,3 +115,11 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--red); outli
 .pix code { background: var(--cream); padding: 8px 12px; border-radius: 8px; word-break: break-all; }
 
 .error { color: #b3261e; margin: 0; font-weight: 600; }
+
+.back {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #fff;
+  opacity: 0.9;
+  font-size: 0.9rem;
+}

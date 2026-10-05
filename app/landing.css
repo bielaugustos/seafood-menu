@@ -1,0 +1,446 @@
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.lp {
+  --forest: #12261a;
+  --lake: #566a24;
+  --lake-deep: #2f3c17;
+  --thatch: #e3b04b;
+  --mist: #eef3ee;
+  --mist-alt: #e2ebe4;
+  --muted: #465a4c;
+  --focus: #12261a;
+  --font-display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--forest);
+  background: var(--mist);
+}
+
+.lp *:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.lp-inner {
+  width: min(70rem, calc(100% - 2.5rem));
+  margin-inline: auto;
+}
+
+/* ---------- Botões ---------- */
+.lp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.7rem 1.4rem;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.lp-btn-primary {
+  background: var(--thatch);
+  color: var(--forest);
+}
+.lp-btn-primary:hover {
+  background: #efc266;
+}
+.lp-btn-ghost {
+  border-color: rgba(255, 255, 255, 0.75);
+  color: #fff;
+}
+.lp-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+.lp-btn-dark {
+  background: var(--forest);
+  color: #fff;
+}
+.lp-btn-dark:hover {
+  background: #1f4129;
+}
+.lp-btn-small {
+  min-height: 42px;
+  padding: 0.45rem 1.05rem;
+  font-size: 0.98rem;
+}
+
+/* ---------- Topo: céu ---------- */
+.lp-sky {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 62svh;
+  overflow: hidden;
+  background: linear-gradient(180deg, #b9d6e8 0%, #dcebe6 62%, #e9f1e6 100%);
+}
+.lp-landscape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.lp-sky-body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.lp-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1rem;
+}
+.lp-brand {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.lp-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+.lp-nav-link {
+  color: inherit;
+  text-decoration: none;
+}
+.lp-nav-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+@media (max-width: 640px) {
+  .lp-nav-link {
+    display: none;
+  }
+  .lp-brand {
+    font-size: 0.95rem;
+  }
+}
+
+.lp-title-wrap {
+  margin-top: auto;
+  padding-top: 2rem;
+}
+.lp-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  color: var(--forest);
+}
+.lp-title-sub {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-size: clamp(1.1rem, 3.4vw, 1.6rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.lp-title-line {
+  display: block;
+  font-size: clamp(3.4rem, 15vw, 7.5rem);
+}
+
+/* Detalhes do cenário só aparecem quando há espaço à direita do título */
+.lp-detail {
+  display: none;
+}
+@media (min-width: 900px) {
+  .lp-detail {
+    display: inline;
+  }
+}
+
+/* ---------- Topo: água e reflexo ---------- */
+.lp-water {
+  --focus: #fff;
+  padding-bottom: clamp(2.5rem, 6vw, 4rem);
+  color: #f3f7e6;
+  background: linear-gradient(180deg, var(--lake) 0%, var(--lake-deep) 100%);
+  box-shadow: inset 0 4px 0 rgba(255, 255, 255, 0.14);
+}
+.lp-reflect {
+  height: clamp(4.5rem, 12vw, 6.5rem);
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  filter: url(#lp-ripple);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent 92%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent 92%);
+}
+.lp-title-mirror {
+  color: #dfeccc;
+  opacity: 0.55;
+  transform: scaleY(-1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .lp-reflect {
+    filter: none;
+  }
+}
+.lp-lead {
+  max-width: 36rem;
+  margin: 1.25rem 0 1.5rem;
+  font-size: clamp(1.15rem, 2.4vw, 1.4rem);
+  line-height: 1.5;
+}
+.lp-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.lp-rating {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1.5rem 0 0;
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  font-weight: 500;
+}
+.lp-stars {
+  color: var(--thatch);
+  letter-spacing: 0.1em;
+}
+
+/* ---------- Seções ---------- */
+.lp-section {
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+}
+.lp-alt {
+  background: var(--mist-alt);
+}
+.lp-h2 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4.4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+.lp-h2-light {
+  color: #fff;
+}
+.lp-intro {
+  max-width: 30rem;
+  margin: 0 0 1.5rem;
+  color: var(--muted);
+}
+.lp-intro-wide {
+  max-width: 40rem;
+  margin-bottom: 2.25rem;
+}
+
+.lp-split {
+  display: grid;
+  gap: 2rem;
+}
+@media (min-width: 860px) {
+  .lp-split {
+    grid-template-columns: 5fr 6fr;
+    gap: 4rem;
+    align-items: start;
+  }
+}
+
+.lp-facts {
+  margin: 0;
+  padding: 0;
+}
+.lp-fact {
+  padding-block: 1.15rem;
+  border-top: 1px solid rgba(18, 38, 26, 0.2);
+}
+.lp-fact:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+.lp-fact-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.lp-fact-text {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+}
+
+/* ---------- Passos (linha de pesca com boias) ---------- */
+.lp-steps {
+  position: relative;
+  display: grid;
+  gap: 2rem;
+  margin: 2.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.lp-step {
+  position: relative;
+  padding-left: 2.25rem;
+}
+.lp-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 1.8rem;
+  bottom: -2rem;
+  left: 10px;
+  width: 2px;
+  background: rgba(18, 38, 26, 0.35);
+}
+.lp-bobber {
+  position: absolute;
+  top: 0.35rem;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--forest);
+  border-radius: 50%;
+  background: linear-gradient(#d8402c 50%, #fff 50%);
+}
+.lp-step-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.lp-step-text {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+}
+@media (min-width: 860px) {
+  .lp-steps {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+  .lp-steps::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: 0;
+    left: 0;
+    height: 2px;
+    background: rgba(18, 38, 26, 0.35);
+  }
+  .lp-step {
+    padding-top: 2.25rem;
+    padding-left: 0;
+  }
+  .lp-step:not(:last-child)::after {
+    display: none;
+  }
+  .lp-bobber {
+    top: 0;
+  }
+}
+
+/* ---------- Cardápio ---------- */
+.lp-menu {
+  display: grid;
+  gap: 2.5rem 4rem;
+}
+@media (min-width: 860px) {
+  .lp-menu {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.lp-menu-title {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.lp-menu-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.lp-menu-list li {
+  padding-block: 0.45rem;
+}
+.lp-menu-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.lp-leader {
+  flex: 1 1 auto;
+  min-width: 1rem;
+  border-bottom: 2px dotted rgba(18, 38, 26, 0.3);
+  transform: translateY(-4px);
+}
+.lp-price {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.lp-desc {
+  margin: 0.1rem 0 0;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+.lp-menu-cta {
+  margin: 2.5rem 0 0;
+}
+
+/* ---------- Fotos ---------- */
+.lp-photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.lp-photos img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* ---------- Chamada final e rodapé ---------- */
+.lp-final {
+  --focus: #fff;
+  padding-block: clamp(3.5rem, 8vw, 5.5rem);
+  color: #fff;
+  background: var(--forest);
+}
+.lp-final-text {
+  max-width: 34rem;
+  margin: 0 0 1.75rem;
+  color: #d3e2d6;
+}
+.lp-footer {
+  padding-block: 1.5rem;
+  font-size: 0.92rem;
+  color: #b9cdbd;
+  background: #0d1c13;
+}
+.lp-footer p {
+  margin: 0;
+}
